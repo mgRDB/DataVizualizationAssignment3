@@ -38,7 +38,7 @@
     <div class ="sub" id="canvas"></div>
 </div>
 <script>
-    d3.json("../data/author.json").then(function (data){
+    d3.json("./data/author.json").then(function (data){
         let svg = d3.select('#canvas').append("svg").attr("viewBox","0 0 1000 800")
         console.log(data)
         simulate(data,svg) // main function to make network
