@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 3 Authorship Network</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./lib/d3.js"></script>
+    
+    <script src="network.js"></script>
+
+</head>
+<body>
+<div id="mainContainer">
+    <div id="topContainer">
+        <div class ="controller" id="leftPanel">
+            <h4>Control</h4>
+            <form>
+                <div>
+                <label for="forceManyBody">forceManyBody</label>
+                <input type="range" name="forceManyBody" id="forceManyBody" min="-20" max="10" value="-12">
+                </div>
+                <div>
+                <label for="forceLink">forceLink</label>
+                <input type="range" name="forceLink" id="forceLink" min="0" max="100" value="20">
+                </div>
+                <div>
+                <label for="forceCollide">forceCollide radius</label>
+                <input type="range" name="forceCollide" id="forceCollide" min="0" max="15">
+                </div>
+            </form>
+        </div>
+        <div id="tooltip">
+            <strong>Author: </strong><br><br>
+            <strong>Author ID: </strong><br><br>
+            <strong>Affiliation: </strong>
+        </div>
+    </div>
+    <div class ="sub" id="canvas"></div>
+</div>
+<script>
+    d3.json("../data/author.json").then(function (data){
+        let svg = d3.select('#canvas').append("svg").attr("viewBox","0 0 1000 800")
+        console.log(data)
+        simulate(data,svg) // main function to make network
+    })
+
+
+
+</script>
+
+</body>
+</html>
