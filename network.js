@@ -25,6 +25,7 @@ function simulate(data,svg)
    })
 
    const tooltip = d3.select("#tooltip");
+   const tooltop = d3.select("#tooltop");
 
     const scale_radius = d3.scaleSqrt()
         .domain(d3.extent(Object.values(node_degree)))
@@ -49,9 +50,24 @@ function simulate(data,svg)
             node_elements.classed("inactive",true)
             console.log(data.Country)
             d3.selectAll("."+"gr_"+data.Group.toString()).classed("inactive",false)
+            console.log(d.clientX)
+            tooltop.transition()
+                .duration(200)
+                .style("opacity", .9)
+            tooltop.html("<strong>Name: </strong>" + data.Name + "<br>" + "<strong>Country: </strong>" + data.Country + "<br>" + "<strong>Affiliation: </strong>" + data.Affiliation)
+                .style("left", (d.clientX + 20) + "px")
+                .style("top", (d.clientY + window.scrollY) + "px");
+        })
+        .on("mousemove",function (d,data){
+            tooltop.style("opacity", .9)
+                .style("left", (d.clientX + 20) + "px")
+                .style("top", (d.clientY + window.scrollY) + "px");
         })
         .on("mouseleave", (d,data)=>{
             d3.selectAll(".inactive").classed("inactive",false)
+            tooltop.transition()
+                .duration(400)
+                .style("opacity", 0)
         })
         .on("click", (d,data)=>{
             tooltip.html("<strong>Author: </strong>" + data.Name + "<br><br>" +
